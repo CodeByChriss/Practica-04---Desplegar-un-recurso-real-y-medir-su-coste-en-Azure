@@ -1,4 +1,4 @@
-# DP-800 Laboratorio 03 - Write advanced T-SQL queries
+# Desplegar un recurso real y medir su coste en Azure
 
 **Autor:** Christian Salguero Varas <br>
 **Fecha:** 22/09/2026 - 23/09/2026 - 24/09/2026
