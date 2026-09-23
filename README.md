@@ -132,3 +132,102 @@ Que nos indica que la opción no está disponible en la región seleccionada.
 Comprobando cada apartado el único que no tenía las Tags era la `Virtual Network` entonces se los agregué a mano.
 
 ![Asignación de Tags en la Red Virtual (Virtual Network)](images/23_AgregarTagsVirtualNetwork.png)
+
+## Primera revisión en Cost Analysis
+
+| Recurso | Coste acumulado |
+| :--- | :---: |
+| **Máquina virtual** | 0.16€ |
+| **Disco** | 0.03€ |
+| **IP pública** | 0.05€ |
+| **Otros** | 0.01€ |
+| **Total (Actual Cost)** | **0.25€** |
+
+![Revisión primer día](images/25_RevisionPrimerDia.png)
+
+## Segunda revisión en Cost Analysis
+
+| Recurso | Coste acumulado |
+| :--- | :---: |
+| **Máquina virtual** | € |
+| **Disco** | € |
+| **IP pública** | € |
+| **Otros** | € |
+| **Total (Actual Cost)** | **€** |
+
+![Revisión segundo día](images/26_RevisionSegundoDia.png)
+
+### Ver el coste por medidor
+
+### Ver el coste diario
+
+### Ver el coste por Tag
+
+### Consultar la previsión
+
+| Dato | Valor |
+| :--- | :---: |
+| **Actual Cost** |  |
+| **Forecasted Cost (fin de mes)** |  |
+| **Budget del laboratorio** |  |
+| **¿Actual supera el Budget?** | Sí/No |
+| **¿Forecast supera el Budget?** | Sí/No |
+
+### Revisar las alertas
+
+| Alerta | ¿Se ha activado? | Fecha y hora |
+| :--- | :---: | :---: |
+| **Actual 50%** |  |  |
+| **Actual 80%** |  |  |
+| **Actual 100%** |  |  |
+| **Forecasted 100%** |  |  |
+
+## Experimento: apagar no es lo mismo que desasignar
+
+## Comparar estimación y coste real
+
+| Concepto | Estimado (Sección 3) | Real (Cost Analysis) | Diferencia |
+| :--- | :---: | :---: | :---: |
+| **Cómputo** | € | € | € |
+| **Disco** | € | € | € |
+| **IP pública** | € | € | € |
+| **Total** | **€** | **€** | **€** |
+
+## Limpieza
+
+## Informe final
+
+## Ejercicio final
+
+### 1. ¿Qué alertas se habrán activado con umbrales Actual 50 %, 80 %, 100 % y Forecasted 100 %?
+
+### 2. ¿Por qué el Forecasted Cost es tan superior al Actual Cost?
+
+### 3. ¿Qué parte del gasto de las 3 VMs detenidas se podría eliminar sin borrarlas?
+
+### 4. Ordena estas acciones de mayor a menor impacto en el ahorro inmediato:
+
+### 5. ¿Cuál de las acciones anteriores no ahorra dinero pero es imprescindible para analizarlo?
+
+## Referencias oficiales
+
+- Microsoft Learn — Tutorial: Create and manage budgets
+    https://learn.microsoft.com/azure/cost-management-billing/costs/tutorial-acm-create-budgets
+    
+- Microsoft Learn — Cost Analysis
+    https://learn.microsoft.com/azure/cost-management-billing/costs/quick-acm-cost-analysis
+    
+- Microsoft Learn — Group and filter options in Cost Analysis and Budgets
+    https://learn.microsoft.com/azure/cost-management-billing/costs/group-filter
+    
+- Microsoft Learn — Create a Linux virtual machine in the Azure portal
+    https://learn.microsoft.com/azure/virtual-machines/linux/quick-create-portal
+    
+- Microsoft Learn — States and billing status of Azure Virtual Machines
+    https://learn.microsoft.com/azure/virtual-machines/states-billing
+    
+- Microsoft Learn — Auto-shutdown a virtual machine
+    https://learn.microsoft.com/azure/virtual-machines/auto-shutdown-vm
+    
+- Azure Pricing Calculator
+    https://azure.microsoft.com/pricing/calculator/
