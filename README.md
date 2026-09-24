@@ -159,55 +159,113 @@ Comprobando cada apartado el único que no tenía las Tags era la `Virtual Netwo
 
 ### Ver el coste por medidor
 
+![Coste por medidor](images/27_CostePorMedidor.png)
+
 ### Ver el coste diario
+
+![Coste por día](images/28_CostePorDia.png)
 
 ### Ver el coste por Tag
 
+![Coste por Tag](images/29_CostePorProjectTag.png)
+
 ### Consultar la previsión
+
+No se puede visualizar la previsión de forecast porque indica que 3 días es insuficiente para calcularlo.
 
 | Dato | Valor |
 | :--- | :---: |
-| **Actual Cost** |  |
-| **Forecasted Cost (fin de mes)** |  |
-| **Budget del laboratorio** |  |
-| **¿Actual supera el Budget?** | Sí/No |
+| **Actual Cost** | 0.78€ |
+| **Forecasted Cost (fin de mes)** | No disponible |
+| **Budget del laboratorio** | 2€ |
+| **¿Actual supera el Budget?** | No |
 | **¿Forecast supera el Budget?** | Sí/No |
 
 ### Revisar las alertas
 
+No se ha activado ninguna ya que lo máximo que se ha llegado a gastar ha sido 0.78€ que queda lejos de 1€.
+
 | Alerta | ¿Se ha activado? | Fecha y hora |
 | :--- | :---: | :---: |
-| **Actual 50%** |  |  |
-| **Actual 80%** |  |  |
-| **Actual 100%** |  |  |
-| **Forecasted 100%** |  |  |
+| **Actual 50%** | No | n/a |
+| **Actual 80%** | No | n/a |
+| **Actual 100%** | No | n/a |
+| **Forecasted 100%** | No | n/a |
 
 ## Experimento: apagar no es lo mismo que desasignar
 
 ## Comparar estimación y coste real
 
+Se está comparando con la estimación B. También hay que tener en cuenta que la máquina ha sido apagada por las noches y encendida por el día.
+
 | Concepto | Estimado (Sección 3) | Real (Cost Analysis) | Diferencia |
 | :--- | :---: | :---: | :---: |
-| **Cómputo** | € | € | € |
-| **Disco** | € | € | € |
-| **IP pública** | € | € | € |
-| **Total** | **€** | **€** | **€** |
+| **Cómputo** | 1,41€ | 0,54€ | 0,87€ |
+| **Disco** | 0,20€ | 0,10€ | 0,10€ |
+| **IP pública** | 0,31€ | 0,14€ | 0,17€ |
+| **Total** | **1,92€** | **0,78€** | **1,14€** |
 
 ## Limpieza
 
+Eliminamos el Resource Group.
+![Eliminar Resource Group](images/30_EliminarResourceGroup.png)
+
+Tras esperar unos minutos el grupo de recurso se elimina completamente al igual que todos sus recursos. Como ya no hay recursos con Tags, no puedo filtrar por Tags.
+![Busqueda Project Tag](images/31_TodosLosRecursos.png)
+
 ## Informe final
 
+| Elemento | Resultado |
+| --- | --- |
+| Nombre de la práctica | Práctica 04 — VM Linux con control de costes |
+| Resource Group | rg-practica04-vm-alumnoXX |
+| Servicios utilizados | Virtual Machine, Managed Disk, Pubilc IP, Virtual Network |
+| Coste estimado antes de desplegar | 1,92€ |
+| Budget disponible | 2,00€ |
+| Alertas configuradas | Actual 50% (1,00 €), Actual 80% (1,60 €), Actual 100% (2,00 €) y Forecasted 100% (2,00 €) |
+| Alertas activadas | Ninguna (el gasto máximo fue de 0,78€) |
+| Coste observado | 0,78€ |
+| Recurso con mayor coste | Máquina virtual / Cómputo (0,54 €) |
+| Recursos eliminados | Todos los recursos del Resource Group (rg-practica04-vm-alumnoXX) eliminados completamente al finalizar el Día 3 |
+| Observaciones | El coste real (0,78 €) fue inferior al estimado (1,92 €) debido a que la Virtual Machine permaneció encendida menos de las 36h previstas. El auto-shutdown no estaba disponible en la región Spain Central, por lo que el apagado lo hice manualmente. Las alertas no se llegaron a disparar y el pronóstico (Forecast) no estuvo disponible por falta de histórico. |
+
 ## Ejercicio final
+Un equipo de DataNova Engineering despliega cinco VMs de pruebas con esta configuración:
+
+```
+Budget del proyecto          = 50 €
+Actual Cost (día 10 del mes) = 22 €
+Forecasted Cost              = 68 €
+Apagado automático           = No configurado
+Estado de 3 VMs              = Stopped (no deallocated)
+```
+
+Responde:
 
 ### 1. ¿Qué alertas se habrán activado con umbrales Actual 50 %, 80 %, 100 % y Forecasted 100 %?
+Se ha activado el Forecasted al 100% ya que ahora mismo el Forecasted Cost es mayor que 50€. El resto de alertas no se han activado.
 
 ### 2. ¿Por qué el Forecasted Cost es tan superior al Actual Cost?
+Porque el Actual Cost es de 22€ y representa únicamente los gastos acumulados en los primeros 10 días del mes. Azure toma ese ritmo de consumo actual y lo proyecta para todo el mes (el resto de 20 días).
 
 ### 3. ¿Qué parte del gasto de las 3 VMs detenidas se podría eliminar sin borrarlas?
+Al cambiar el estado de las VMs de Stopped (apagadas desde su sistema operativo) a Stopped (Deallocated) (desasignadas desde el portal de Azure), Azure libera los recursos hardware y deja de cobrar el cómputo por horas. El disco y la IP pública asignada seguirán cobrándose mientras existan.
 
 ### 4. Ordena estas acciones de mayor a menor impacto en el ahorro inmediato:
+[ 1 ] Desasignar las 3 VMs detenidas. (Elimina inmediatamente el cobro por hora del cómputo de 3 máquinas que no se están usando).
+
+[ 2 ] Configurar apagado automático en las 5 VMs. (Reduce masivamente las horas de cómputo activas).
+
+[ 3 ] Cambiar los discos de Premium SSD a Standard SSD. (Ahorro permanente en el almacenamiento).
+
+[ 4 ] Eliminar las IP públicas que no se usan. (Ahorro continuo menor por IP pública reservada).
+
+[ 5 ] Añadir Tags a todos los recursos. (Impacto nulo en el coste directo).
 
 ### 5. ¿Cuál de las acciones anteriores no ahorra dinero pero es imprescindible para analizarlo?
+Añadir Tags a todos los recursos.
+
+Aplicar etiquetas no reduce la factura de Azure, pero es un paso indispensable para tener controlado el gasto por proeycto, departamento, etc. Y detectar qué recursos o equipos están generando más gastos.
 
 ## Referencias oficiales
 
