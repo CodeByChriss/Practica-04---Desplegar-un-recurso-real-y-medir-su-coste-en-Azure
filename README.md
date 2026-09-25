@@ -205,6 +205,11 @@ Se está comparando con la estimación B. También hay que tener en cuenta que l
 | **IP pública** | 0,31€ | 0,14€ | 0,17€ |
 | **Total** | **1,92€** | **0,78€** | **1,14€** |
 
+## Verificación día final (día 4)
+
+Podemos ver que el cuarto día (25/09/2026) hay un gasto de 0.0€. También se puede observar que el gasto del día anterior es mayor que las capturas anteriores, y esto es debido a otras prácticas realizadas sobre SQL, etc.
+![Dia final con gasto 0](images/32_Dia4.png)
+
 ## Limpieza
 
 Eliminamos el Resource Group.
